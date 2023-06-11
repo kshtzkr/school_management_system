@@ -1,14 +1,22 @@
-<p style="color: green"><%= notice %></p>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <p class="text-center text-success"><%= notice %></p>
 
-<h1>Courses</h1>
+      <h1 class="text-center">Courses</h1>
 
-<div id="courses">
-  <% @courses.each do |course| %>
-    <%= render course %>
-    <p>
-      <%= link_to "Show this course", course %>
-    </p>
-  <% end %>
+      <div id="courses">
+        <% @courses.each do |course| %>
+          <%= render course %>
+          <p class="text-center">
+            <%= link_to "Show this course", course, class: "btn btn-primary" %>
+          </p>
+        <% end %>
+      </div>
+
+      <div class="text-center">
+        <%= link_to "New course", new_course_path, class: "btn btn-primary" %>
+      </div>
+    </div>
+  </div>
 </div>
-
-<%= link_to "New course", new_course_path %>

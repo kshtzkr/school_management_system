@@ -1,10 +1,15 @@
-<p style="color: green"><%= notice %></p>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <p class="text-center text-success"><%= notice %></p>
 
-<%= render @batch %>
+      <%= render @batch %>
 
-<div>
-  <%= link_to "Edit this batch", edit_batch_path(@batch) %> |
-  <%= link_to "Back to batches", batches_path %>
-
-  <%= button_to "Destroy this batch", @batch, method: :delete %>
+      <div class="text-center">
+        <%= link_to "Edit this batch", edit_batch_path(@batch), class: "btn btn-primary" %>
+        <%= link_to "Back to batches", batches_path, class: "btn btn-secondary" %>
+        <%= button_to "Destroy this batch", @batch, method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure?" } %>
+      </div>
+    </div>
+  </div>
 </div>

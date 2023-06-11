@@ -1,10 +1,15 @@
-<p style="color: green"><%= notice %></p>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <p class="text-center text-success"><%= notice %></p>
 
-<%= render @course %>
+      <%= render @course %>
 
-<div>
-  <%= link_to "Edit this course", edit_course_path(@course) %> |
-  <%= link_to "Back to courses", courses_path %>
-
-  <%= button_to "Destroy this course", @course, method: :delete %>
+      <div class="text-center">
+        <%= link_to "Edit this course", edit_course_path(@course), class: "btn btn-primary" %>
+        <%= link_to "Back to courses", courses_path, class: "btn btn-secondary" %>
+        <%= button_to "Destroy this course", @course, method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure?" } %>
+      </div>
+    </div>
+  </div>
 </div>

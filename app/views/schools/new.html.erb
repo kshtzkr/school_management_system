@@ -1,9 +1,15 @@
-<h1>New school</h1>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <h1 class="text-center">New school</h1>
 
-<%= render "form", school: @school %>
+      <%= render "form", school: @school %>
 
-<br>
+      <br>
 
-<div>
-  <%= link_to "Back to schools", schools_path %>
+      <div class="text-center">
+        <%= link_to "Back to schools", schools_path, class: "btn btn-primary" %>
+      </div>
+    </div>
+  </div>
 </div>

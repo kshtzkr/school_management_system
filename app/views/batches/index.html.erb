@@ -1,14 +1,22 @@
-<p style="color: green"><%= notice %></p>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <p class="text-center text-success"><%= notice %></p>
 
-<h1>Batches</h1>
+      <h1 class="text-center">Batches</h1>
 
-<div id="batches">
-  <% @batches.each do |batch| %>
-    <%= render batch %>
-    <p>
-      <%= link_to "Show this batch", batch %>
-    </p>
-  <% end %>
+      <div id="batches">
+        <% @batches.each do |batch| %>
+          <%= render batch %>
+          <p class="text-center">
+            <%= link_to "Show this batch", batch %>
+          </p>
+        <% end %>
+      </div>
+
+      <div class="text-center">
+        <%= link_to "New batch", new_batch_path, class: "btn btn-primary" %>
+      </div>
+    </div>
+  </div>
 </div>
-
-<%= link_to "New batch", new_batch_path %>
