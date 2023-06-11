@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   devise_for :users
-  root to: 'schools#index'
+  devise_scope :user do
+    root to: 'devise/sessions#new'
+    # other scoped routes
+  end
+
   resources :batches
   resources :courses
   resources :schools
