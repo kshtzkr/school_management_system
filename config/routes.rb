@@ -1,6 +1,14 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  devise_for :users
+  root to: 'schools#index'
+  resources :batches
+  resources :courses
+  resources :schools
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  resources :users do
+    member do
+      post 'assign_role/:role_id', to: 'users#assign_role', as: 'assign_role'
+      delete 'remove_role/:role_id', to: 'users#remove_role', as: 'remove_role'
+    end
+  end
 end
