@@ -4,7 +4,6 @@ class SchoolsController < ApplicationController
 
   # GET /schools or /schools.json
   def index
-    pp current_user
     @schools = School.all
   end
 

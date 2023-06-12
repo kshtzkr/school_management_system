@@ -1,5 +1,5 @@
 class BatchesController < ApplicationController
-  before_action :set_batch, only: %i[ show edit update destroy ]
+  before_action :set_batch, only: %i[ show edit update destroy link_student ]
 
   # GET /batches or /batches.json
   def index
@@ -55,6 +55,9 @@ class BatchesController < ApplicationController
       format.html { redirect_to batches_url, notice: "Batch was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def link_student
   end
 
   private

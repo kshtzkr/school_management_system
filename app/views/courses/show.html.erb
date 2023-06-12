@@ -3,13 +3,48 @@
     <div class="col-md-6">
       <p class="text-center text-success"><%= notice %></p>
 
-      <%= render @course %>
-
       <div class="text-center">
         <%= link_to "Edit this course", edit_course_path(@course), class: "btn btn-primary" %>
         <%= link_to "Back to courses", courses_path, class: "btn btn-secondary" %>
         <%= button_to "Destroy this course", @course, method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure?" } %>
+      </div><br>
+
+      <%= render @course %>
+
+      <div>
+        <strong>Batches Linked with this Course</strong>
       </div>
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-12">
+            <p class="text-center text-success"><%= notice %></p>
+
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Batch Name</th>
+                  <th>Course Name</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @course.batches.each do |batch| %>
+                  <tr>
+                    <td><%= batch.name %></td>
+                    <td><%= batch.course.name %></td>
+                    <td>
+                      <%= link_to "Show this batch", batch, class: "btn btn-primary" %>
+                      <%= link_to "Edit", edit_batch_path(batch), class: "btn btn-primary" %>
+                      <%= link_to "Delete", batch, method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure?" } %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <%= link_to "Back to schools", schools_path, class: "btn btn-success" %>
     </div>
   </div>
 </div>

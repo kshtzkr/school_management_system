@@ -9,4 +9,39 @@
     <%= school.address %>
   </p>
 
+  <div>
+    <strong>Courses Linked with this School</strong>
+  </div>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-12">
+        <p class="text-center text-success"><%= notice %></p>
+
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Course Name</th>
+              <th>School Name</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% school.courses.each do |course| %>
+              <tr>
+                <td><%= course.name %></td>
+                <td><%= course.school.name %></td>
+                <td>
+                  <%= link_to "Show this course", course, class: "btn btn-primary" %>
+                  <%= link_to "Edit", edit_course_path(course), class: "btn btn-primary" %>
+                  <%= link_to "Delete", course, method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure?" } %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+
 </div>

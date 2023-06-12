@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_11_230415) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_12_024230) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -43,6 +43,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_11_230415) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "user_batches", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "batch_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["batch_id"], name: "index_user_batches_on_batch_id"
+    t.index ["user_id"], name: "index_user_batches_on_user_id"
+  end
+
   create_table "user_roles", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "role_id", null: false
@@ -66,6 +75,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_11_230415) do
 
   add_foreign_key "batches", "courses"
   add_foreign_key "courses", "schools"
+  add_foreign_key "user_batches", "batches"
+  add_foreign_key "user_batches", "users"
   add_foreign_key "user_roles", "roles"
   add_foreign_key "user_roles", "users"
 end
