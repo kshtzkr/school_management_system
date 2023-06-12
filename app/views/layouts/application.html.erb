@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>SchoolManagementSystem</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title><a href='/'> SchoolManagementSystem</a> </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -11,6 +11,25 @@
   </head>
 
   <body>
-    <%= yield %>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <a class="navbar-brand" href="#">School Management System</a>
+        <% if user_signed_in? %>
+          <div class="d-flex align-items-center">
+            <span class="navbar-text me-3">
+              <%= current_user.email %>
+            </span>
+            <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: 'btn btn-danger' %>
+          </div>
+        <% end %>
+      </div>
+    </nav>
+
+    <div class="container mt-4">
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+
+      <%= yield %>
+    </div>
   </body>
 </html>

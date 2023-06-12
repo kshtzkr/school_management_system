@@ -1,6 +1,10 @@
-class UserController < ApplicationController
+class UsersController < ApplicationController
   before_action :set_user, only: [:assign_role, :remove_role]
   before_action :authenticate_user!
+
+  def show
+
+  end
 
   def assign_role
     @user.roles << Role.find(params[:role_id])

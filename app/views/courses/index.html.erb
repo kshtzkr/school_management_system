@@ -5,17 +5,18 @@
 
       <h1 class="text-center">Courses</h1>
 
+      <div class="text-center">
+        <%= link_to "New course", new_course_path, class: "btn btn-primary" %>
+      </div><br>
+
       <div id="courses">
         <% @courses.each do |course| %>
           <%= render course %>
           <p class="text-center">
             <%= link_to "Show this course", course, class: "btn btn-primary" %>
+            <%= link_to "Create New batch", new_batch_path, class: "btn btn-secondary" %>
           </p>
         <% end %>
-      </div>
-
-      <div class="text-center">
-        <%= link_to "New course", new_course_path, class: "btn btn-primary" %>
       </div>
     </div>
   </div>
