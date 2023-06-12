@@ -2,7 +2,11 @@ Rails.application.routes.draw do
   devise_for :users
   root to:  'schools#index'
 
-  resources :batches
+  resources :batches do
+    member do
+      post :link_student
+    end
+  end
   resources :courses
   resources :schools
 

@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
 
   def new
-    @student = User.new
+    @student = UserBatch.new
   end
 
   def create

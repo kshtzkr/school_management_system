@@ -1,15 +1,15 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-6">
-      <%= form_with(model: user, url: users_path, method: :post, class: "card") do |form| %>
+      <%= form_with(model: user_batch, url: link_student_batch_path, method: :post, class: "card") do |form| %>
         <div class="card-body">
-          <% if user.errors.any? %>
+          <% if user_batch.errors.any? %>
             <div class="alert alert-danger">
               <h4 class="alert-heading">
-                <%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:
+                <%= pluralize(user_batch.errors.count, "error") %> prohibited this user_batch from being saved:
               </h4>
               <ul>
-                <% user.errors.each do |error| %>
+                <% user_batch.errors.each do |error| %>
                   <li><%= error.full_message %></li>
                 <% end %>
               </ul>
@@ -17,13 +17,13 @@
           <% end %>
 
           <div class="form-group">
-            <%= form.label :name %>
-            <%= form.text_field :name, class: "form-control" %>
+            <%= form.label :batch %>
+            <%= form.collection_select :batch_id, Batch.all, :id, :name, { prompt: 'Select a batch' }, class: "form-control" %>
           </div>
 
           <div class="form-group">
-            <%= form.label :email %>
-            <%= form.text_field :email, class: "form-control" %>
+            <%= form.label :user %>
+            <%= form.collection_select :user_id, User.includes(:roles).where(roles: {name: 'student'}) || User.all, :id, :name, { prompt: 'Select a batch' }, class: "form-control" %>
           </div>
 
           <div class="form-group">

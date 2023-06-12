@@ -58,6 +58,7 @@ class BatchesController < ApplicationController
   end
 
   def link_student
+    
   end
 
   private
