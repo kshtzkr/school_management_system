@@ -6,7 +6,9 @@
       <h1 class="text-center">Batches</h1>
 
       <div class="text-center">
+      <% if can?(:create, Batch) %>
         <%= link_to "New batch", new_batch_path, class: "btn btn-primary" %>
+      <% end %>
         <%= link_to "Back to courses", courses_path, class: "btn btn-secondary" %>
       </div><br>
 

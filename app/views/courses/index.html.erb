@@ -6,7 +6,9 @@
       <h1 class="text-center">Courses</h1>
 
       <div class="text-center">
+      <% if can?(:create, Course) %>
         <%= link_to "New course", new_course_path, class: "btn btn-primary" %>
+      <% end %>
         <%= link_to "Back to schools", schools_path, class: "btn btn-secondary" %>
       </div><br>
 

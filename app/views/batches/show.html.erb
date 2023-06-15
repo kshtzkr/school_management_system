@@ -3,9 +3,13 @@
     <div class="col-md-6">
       <p class="text-center text-success"><%= notice %></p>
       <div class="text-center">
-        <%= link_to "Edit this batch", edit_batch_path(@batch), class: "btn btn-primary" %>
+        <% if can?(:update, @batch) %>
+          <%= link_to "Edit this batch", edit_batch_path(@batch), class: "btn btn-primary" %>
+        <% end %>
         <%= link_to "Back to batches", batches_path, class: "btn btn-secondary" %>
-        <%= button_to "Destroy this batch", @batch, method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure?" } %>
+        <% if can?(:destroy, @batch) %>
+          <%= button_to "Destroy this batch", @batch, method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure?" } %>
+        <% end %>
       </div>
 
       <%= render @batch %>
@@ -23,7 +27,7 @@
                 <tr>
                   <th>Student Name</th>
                   <th>Actions</th>
-                </tr>
+                </tr>ˀ
               </thead>
               <tbody>
                 <% User.joins(:roles).where(roles:{name: 'student'}).each do |student| %>

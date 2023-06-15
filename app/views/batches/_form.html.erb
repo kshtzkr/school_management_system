@@ -25,7 +25,9 @@
         </div><br>
 
         <div class="text-center">
-          <%= form.submit class: "btn btn-primary" %>
+          <% if can?(:create, batch) %>
+            <%= form.submit class: "btn btn-primary" %>
+          <% end %>
         </div>
       <% end %>
     </div>

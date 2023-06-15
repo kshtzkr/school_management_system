@@ -4,9 +4,13 @@
       <p class="text-center text-success"><%= notice %></p>
 
       <div class="text-center">
-        <%= link_to "Edit this course", edit_course_path(@course), class: "btn btn-primary" %>
-        <%= link_to "Back to courses", courses_path, class: "btn btn-secondary" %>
-        <%= button_to "Destroy this course", @course, method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure?" } %>
+        <% if can?(:update, @course) %>
+          <%= link_to "Edit this course", edit_course_path(@course), class: "btn btn-primary" %>
+        <% end %>
+          <%= link_to "Back to courses", courses_path, class: "btn btn-secondary" %>
+        <% if can?(:destroy, @course) %>
+          <%= button_to "Destroy this course", @course, method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure?" } %>
+        <% end %>
       </div><br>
 
       <%= render @course %>

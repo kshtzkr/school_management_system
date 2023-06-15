@@ -4,16 +4,21 @@
       <p class="text-center text-success"><%= notice %></p>
 
       <div class="text-center">
-        <%= link_to "Edit this school", edit_school_path(@school), class: "btn btn-primary" %> |
+        <% if can?(:update, @school) %>
+          <%= link_to "Edit this school", edit_school_path(@school), class: "btn btn-primary" %>
+        <% end %> |
         <%= link_to "Back to schools", schools_path, class: "btn btn-secondary" %><br>
-
-        <%= button_to "Destroy this school", @school, method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure?" } %>
+        <% if can?(:destroy, @school) %>
+          <%= button_to "Destroy this school", @school, method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure?" } %>
+        <% end %>
       </div>
 
       <%= render @school %>
     </div>
   </div><br>
   <div class="text-center">
-    <%= link_to "Create New course", new_course_path, class: "btn btn-primary" %>
+    <% if can?(:create, Course) %>
+      <%= link_to "Create New course", new_course_path, class: "btn btn-primary" %>
+    <% end %>
   </div>
 </div>
