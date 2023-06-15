@@ -69,9 +69,14 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
+  gem 'factory_bot_rails'
+  gem 'rspec-rails'
+  gem 'faker'
+  gem 'shoulda-matchers'
 end
 gem 'devise'
 gem 'cancancan'
 gem 'bootstrap'
 gem 'jquery-rails'
 gem 'awesome_print'
+gem 'warden'
