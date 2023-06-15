@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :batches do
     get :link_student
     get :approve_student_batch
+    get :student_progress
   end
   resources :courses
   resources :schools

@@ -59,6 +59,9 @@
                           <%= link_to "Approve Batch Request", batch_approve_student_batch_path(batch_id: @batch.id, user_id: student.id), class: "btn btn-success" %>
                         <% end %>
                       <% end %>
+                      <% if current_user.is_student? && user_batch.present? && user_batch.progress < 100 %>
+                        <%= link_to "Increase the progess by 1%", batch_student_progress_path(batch_id: @batch.id, user_id: student.id), class: "btn btn-success" %>
+                      <% end %>
                     </td>
                   </tr>
                 <% end %>
