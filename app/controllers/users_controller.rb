@@ -23,7 +23,8 @@ class UsersController < ApplicationController
   end
 
   def show
-
+    sign_out(current_user)
+    redirect_to root_path, notice: "Signed out successfully."
   end
 
   def assign_role

@@ -3,9 +3,7 @@ Rails.application.routes.draw do
   root to:  'schools#index'
 
   resources :batches do
-    member do
-      post :link_student
-    end
+    get :link_student
   end
   resources :courses
   resources :schools

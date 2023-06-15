@@ -1,5 +1,5 @@
 class BatchesController < ApplicationController
-  before_action :set_batch, only: %i[ show edit update destroy link_student ]
+  before_action :set_batch, only: %i[ show edit update destroy ]
 
   # GET /batches or /batches.json
   def index
@@ -58,7 +58,30 @@ class BatchesController < ApplicationController
   end
 
   def link_student
-    
+    user = User.find_by(id: params[:user_id])
+    @batch = Batch.find_by(id: params[:batch_id])
+    linking = params[:linking] == 'true' ? true : false
+    if user.present? && @batch.present?
+      if linking
+        user.user_batches.create(batch_id: @batch.id)
+        respond_to do |format|
+          format.html { redirect_to batch_url(@batch), notice: "User has been successfully linked to batch." }
+          format.json { render :show, status: :ok, location: @batch }
+        end
+      else
+        linked_user = @batch.user_batches.find_by(user_id: user.id)
+        linked_user.destroy if linked_user.present?
+        respond_to do |format|
+          format.html { redirect_to batch_url(@batch), notice: "User has been successfully Unlinked to batch." }
+          format.json { render :show, status: :ok, location: @batch }
+        end
+      end
+    else
+      respond_to do |format|
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @batch.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   private

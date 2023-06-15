@@ -7,15 +7,14 @@
 
       <div class="text-center">
         <%= link_to "New batch", new_batch_path, class: "btn btn-primary" %>
-        <%= link_to "Create Student To Batch", new_user_path, class: "btn btn-warning" %>
-        <%= link_to "Link Student To Batch", new_user_path, class: "btn btn-secondary" %>
+        <%= link_to "Back to courses", courses_path, class: "btn btn-secondary" %>
       </div><br>
 
       <div id="batches">
         <% @batches.each do |batch| %>
           <%= render batch %>
           <p class="text-center">
-            <%= link_to "Show this batch", batch %>
+            <%= link_to "Show this batch", batch, class: "btn btn-primary" %>
           </p>
         <% end %>
       </div>
