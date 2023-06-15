@@ -26,6 +26,7 @@
               <thead>
                 <tr>
                   <th>Student Name</th>
+                  <th>Student Progress</th>
                   <th>Actions</th>
                 </tr>ˀ
               </thead>
@@ -33,11 +34,30 @@
                 <% User.joins(:roles).where(roles:{name: 'student'}).each do |student| %>
                   <tr>
                     <td><%= student.email %></td>
+                    <% user_batch = student.user_batches.find_by(batch_id: @batch.id) %>
                     <td>
-                      <% if @batch.user_batches.find_by(user_id: student.id).present? %>
-                        <%= link_to "Remove User from Batch", batch_link_student_path(batch_id: @batch.id, user_id: student.id, linking: false), class: "btn btn-danger", data: { confirm: "Are you sure?" } %>
+                      <% if user_batch.present? || current_user.is_admin? || current_user.is_school_admin? %>
+                        <%= student.user_batches.find_by(batch_id: @batch.id).progress || 0 %>%
                       <% else %>
-                        <%= link_to "Add User to Batch", batch_link_student_path(batch_id: @batch.id, user_id: student.id, linking: true), class: "btn btn-primary" %>
+                        You do not have permission to see
+                      <% end %>
+                    </td>
+                    <td>
+                      <% if can?(:link_student, @batch) %>
+                        <% if @batch.user_batches.find_by(user_id: student.id).present? %>
+                          <%= link_to "Remove User from Batch", batch_link_student_path(batch_id: @batch.id, user_id: student.id, linking: false), class: "btn btn-danger", data: { confirm: "Are you sure?" } %>
+                        <% else %>
+                          <%= link_to "Add User to Batch", batch_link_student_path(batch_id: @batch.id, user_id: student.id, linking: true), class: "btn btn-primary" %>
+                        <% end %>
+                      <% end %>
+                      <% if current_user.is_student? %>
+                        <% unless student.user_batches.where(batch_id: @batch.id).present? %>
+                          <%= link_to "Join Batch Request", batch_link_student_path(batch_id: @batch.id, user_id: student.id, linking: true), class: "btn btn-primary" %>
+                        <% end %>
+                      <% elsif current_user.is_admin? || current_user.is_school_admin? %>
+                        <% if student.user_batches.where(batch_id: @batch.id).present? %>
+                          <%= link_to "Approve Batch Request", batch_approve_student_batch_path(batch_id: @batch.id, user_id: student.id), class: "btn btn-success" %>
+                        <% end %>
                       <% end %>
                     </td>
                   </tr>

@@ -12,6 +12,7 @@ class Ability
       can :manage, School
       can :manage, Course, school_id: user.school_id
       can :manage, Batch, course: { school_id: user.school_id }
+      can :link_student, Batch # Ability for linking a student to a batch
     elsif user.roles.pluck(:name).include?('student')
       can :read, Course
       can :read, Batch

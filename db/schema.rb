@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_15_002625) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_15_010825) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -49,6 +49,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_15_002625) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "progress"
+    t.boolean "is_approved", default: false
     t.index ["batch_id"], name: "index_user_batches_on_batch_id"
     t.index ["user_id"], name: "index_user_batches_on_user_id"
     t.check_constraint "progress <= 100", name: "check_progress_within_limit"

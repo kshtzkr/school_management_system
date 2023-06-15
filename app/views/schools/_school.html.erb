@@ -32,8 +32,12 @@
                 <td><%= course.school.name %></td>
                 <td>
                   <%= link_to "Show this course", course, class: "btn btn-primary" %>
-                  <%= link_to "Edit", edit_course_path(course), class: "btn btn-primary" %>
-                  <%= link_to "Delete", course, method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure?" } %>
+                  <% if can?(:update, course) %>
+                    <%= link_to "Edit", edit_course_path(course), class: "btn btn-primary" %>
+                  <% end %>
+                  <% if can?(:destroy, course) %>
+                    <%= link_to "Delete", course, method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure?" } %>
+                  <% end %>
                 </td>
               </tr>
             <% end %>

@@ -38,8 +38,12 @@
                     <td><%= batch.course.name %></td>
                     <td>
                       <%= link_to "Show this batch", batch, class: "btn btn-primary" %>
-                      <%= link_to "Edit", edit_batch_path(batch), class: "btn btn-primary" %>
-                      <%= link_to "Delete", batch, method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure?" } %>
+                      <% if can?(:create, batch) %>
+                        <%= link_to "Edit", edit_batch_path(batch), class: "btn btn-primary" %>
+                      <% end %>
+                      <% if can?(:create, Course) %>
+                        <%= link_to "Delete", batch, method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure?" } %>
+                      <% end %>
                     </td>
                   </tr>
                 <% end %>

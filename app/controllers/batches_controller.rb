@@ -63,7 +63,11 @@ class BatchesController < ApplicationController
     linking = params[:linking] == 'true' ? true : false
     if user.present? && @batch.present?
       if linking
-        user.user_batches.create(batch_id: @batch.id)
+        if current_user.is_admin? || current_user.is_school_admin?
+          user.user_batches.create(batch_id: @batch.id,is_approved: true)
+        else
+          user.user_batches.create(batch_id: @batch.id)
+        end
         respond_to do |format|
           format.html { redirect_to batch_url(@batch), notice: "User has been successfully linked to batch." }
           format.json { render :show, status: :ok, location: @batch }
@@ -83,6 +87,23 @@ class BatchesController < ApplicationController
       end
     end
   end
+
+  def approve_student_batch
+    user_batch = UserBatch.find_by(batch_id: params[:batch_id],user_id: params[:user_id])
+    if user_batch
+      user_batch.update(is_approved: true)
+      respond_to do |format|
+        format.html { redirect_to batch_url(user_batch.batch), notice: "Student has been approved for the batch." }
+        format.json { render :show, status: :ok, location: user_batch.batch }
+      end
+    else
+      respond_to do |format|
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: user_batch.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+  
 
   private
     # Use callbacks to share common setup or constraints between actions.
